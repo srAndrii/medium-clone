@@ -13,6 +13,7 @@ import { TopBarModule } from './shared/modules/topBar/topBar.module'
 import { PersistenceService } from './shared/services/persistence.service'
 import { AuthInterceptor } from './shared/services/authInterceptor'
 import { GlobalFeedModule } from './globalFeed/globalFeed.module'
+import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store'
 
 @NgModule({
     declarations: [AppComponent],
@@ -21,11 +22,12 @@ import { GlobalFeedModule } from './globalFeed/globalFeed.module'
         AppRoutingModule,
         HttpClientModule,
         AuthModule,
-        StoreModule.forRoot({}, {}),
+        StoreModule.forRoot({ router: routerReducer }),
         StoreDevtoolsModule.instrument({
             maxAge: 25,
             logOnly: environment.production,
         }),
+        StoreRouterConnectingModule.forRoot(),
         EffectsModule.forRoot([]),
         TopBarModule,
         GlobalFeedModule,
